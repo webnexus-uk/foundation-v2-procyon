@@ -93,31 +93,6 @@ const Transactions = function (config, rpcData) {
       ]);
     }
 
-    const devFundReward = rpcData.DevFundValue;
-    const devFundScript = utils.addressToScript(
-      rpcData.DevFundAddress,
-      network
-    );
-    txOutputBuffers.unshift(
-      Buffer.concat([
-        utils.packUInt64LE(devFundReward),
-        utils.varIntBuffer(devFundScript.length),
-        devFundScript,
-      ])
-    );
-    const proofOfGameplayReward = rpcData.ProofOfGameplayValue;
-    const proofOfGameplayScript = utils.addressToScript(
-      rpcData.ProofOfGameplayAddress,
-      network
-    );
-    txOutputBuffers.unshift(
-      Buffer.concat([
-        utils.packUInt64LE(proofOfGameplayReward),
-        utils.varIntBuffer(proofOfGameplayScript.length),
-        proofOfGameplayScript,
-      ])
-    );
-
     // Build First Part of Generation Transaction
     const p1 = Buffer.concat([
       utils.packUInt32LE(txVersion),
